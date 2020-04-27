@@ -44,7 +44,7 @@
 		"3.6.17": {
 			"majorversion": "3.6",
 			"latest": false,
-			"ref": "mongodb:3.6.17",
+			"ref": "mongo:3.6.17",
 			"base": "gearboxworks/gearbox-base:ubuntu-xenial"
 		}
 	}
