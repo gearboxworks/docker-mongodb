@@ -1,0 +1,85 @@
+
+################################################################################
+# WARNING: This file has been auto-generated. DO NOT EDIT: WARNING
+# Created on 2020-04-27T20:56:19+1000, using template:DockerfileRuntime.tmpl and json:gearbox.json
+# Referenced Docker container for docker-mongodb based off gearboxworks/gearbox-base:ubuntu-xenial with mongodb:3.6.17 overlayed.
+
+ARG VERSION=3.6.17
+
+# 1. First reference the gearbox-base image.
+FROM gearboxworks/gearbox-base:ubuntu-xenial as gearbox-base
+
+# 2. Next reference the third party image.
+FROM mongodb:3.6.17
+ARG VERSION
+ARG GEARBOX_ENTRYPOINT
+ARG GEARBOX_ENTRYPOINT_ARGS
+USER root
+
+# 3. Copy the build directory over from gearbox-base image.
+COPY --from=gearbox-base /etc/gearbox /etc/gearbox
+
+# 4. Set up env variables.
+MAINTAINER Gearbox Team <team@gearbox.works>
+ENV GEARBOX_CONTAINER_NAME "docker-mongodb"
+ENV GEARBOX_CONTAINER_VERSION ${VERSION}
+ENV GEARBOX_ENTRYPOINT ${GEARBOX_ENTRYPOINT}
+ENV GEARBOX_ENTRYPOINT_ARGS ${GEARBOX_ENTRYPOINT_ARGS}
+LABEL gearbox.json='{"schema": "gear-1","meta": {"state": "production","organization": "gearboxworks","name": "mongodb","label": "MongoDB","maintainer": "Gearbox Team <team@gearbox.works>","class": "database","refurl": "https://www.mongodb.com/"},"build": {"ports": {"mongodb": "27017"},"run": "","args": "","env": {"MONGODB_USER": "gearbox"},"network": "--network gearboxnet","volumes": "","restart": "--restart no"},"run": {},"project": {},"extensions": {},"versions": {"4.2.6": {"majorversion": "4.2","latest": true,"ref": "mongodb:4.2.6","base": "gearboxworks/gearbox-base:ubuntu-bionic"},"3.6.17": {"majorversion": "3.6","latest": false,"ref": "mongodb:3.6.17","base": "gearboxworks/gearbox-base:ubuntu-xenial"}}}'
+LABEL gearbox.version='3.6.17'
+ENV GEARBOX_VERSION "3.6.17"
+LABEL container.class="database"
+ENV GEARBOX_CLASS "database"
+LABEL container.label="MongoDB"
+ENV GEARBOX_LABEL "MongoDB"
+LABEL container.maintainer="Gearbox Team <team@gearbox.works>"
+ENV GEARBOX_MAINTAINER "Gearbox Team <team@gearbox.works>"
+LABEL container.name="mongodb"
+ENV GEARBOX_NAME "mongodb"
+LABEL container.organization="gearboxworks"
+ENV GEARBOX_ORGANIZATION "gearboxworks"
+LABEL container.refurl="https://www.mongodb.com/"
+ENV GEARBOX_REFURL "https://www.mongodb.com/"
+LABEL container.state="production"
+ENV GEARBOX_STATE "production"
+LABEL container.args=""
+ENV GEARBOX_ARGS ""
+# SKIP env
+LABEL container.network="--network gearboxnet"
+ENV GEARBOX_NETWORK "--network gearboxnet"
+LABEL container.ports="map[mongodb:27017]"
+ENV GEARBOX_PORTS "map[mongodb:27017]"
+LABEL container.restart="--restart no"
+ENV GEARBOX_RESTART "--restart no"
+LABEL container.run=""
+ENV GEARBOX_RUN ""
+LABEL container.volumes=""
+ENV GEARBOX_VOLUMES ""
+LABEL container.base="gearboxworks/gearbox-base:ubuntu-xenial"
+ENV GEARBOX_BASE "gearboxworks/gearbox-base:ubuntu-xenial"
+LABEL container.latest="false"
+ENV GEARBOX_LATEST "false"
+LABEL container.majorversion="3.6"
+ENV GEARBOX_MAJORVERSION "3.6"
+LABEL container.ref="mongodb:3.6.17"
+ENV GEARBOX_REF "mongodb:3.6.17"
+ENV MONGODB_USER "gearbox"
+
+# 5. Now copy the local files specific to this container.
+COPY build /etc/gearbox
+COPY versions/${VERSION}/build /etc/gearbox
+
+# 6. Run the base.sh script to set everything up.
+RUN /bin/sh /etc/gearbox/build/base.sh
+
+# 7. Run the mongodb.sh script to set everything up.
+RUN /bin/sh /etc/gearbox/build/mongodb.sh
+
+# 8. Expose ports.
+EXPOSE 22 9970 27017 
+WORKDIR /home/gearbox/projects
+
+CMD ["/init"]
+
+# END
+################################################################################

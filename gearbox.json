@@ -1,0 +1,45 @@
+{
+	"schema": "gear-1",
+	"meta": {
+		"state": "production",
+		"organization": "gearboxworks",
+		"name": "mongodb",
+		"label": "MongoDB",
+		"maintainer": "Gearbox Team <team@gearbox.works>",
+		"class": "database",
+		"refurl": "https://www.mongodb.com/"
+	},
+	"build": {
+		"ports": {
+			"mongodb": "27017"
+		},
+		"run": "",
+		"args": "",
+		"env": {
+			"MONGODB_USER": "gearbox"
+		},
+		"network": "--network gearboxnet",
+		"volumes": "",
+		"restart": "--restart no"
+	},
+	"run": {
+	},
+	"project": {
+	},
+	"extensions": {
+	},
+	"versions": {
+		"4.2.6": {
+			"majorversion": "4.2",
+			"latest": true,
+			"ref": "mongodb:4.2.6",
+			"base": "gearboxworks/gearbox-base:ubuntu-bionic"
+		},
+		"3.6.17": {
+			"majorversion": "3.6",
+			"latest": false,
+			"ref": "mongodb:3.6.17",
+			"base": "gearboxworks/gearbox-base:ubuntu-xenial"
+		}
+	}
+}
