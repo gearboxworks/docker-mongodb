@@ -33,8 +33,8 @@ However, due to the flexability of Gearbox, it can be used outside of this frame
 
 There are three methods:
 
-## Method 1: Using gb-launch
-`gb-launch` is a tool specifically designed to interact with a Gearbox Docker container.
+## Method 1: Using launch
+`launch` is a tool specifically designed to interact with a Gearbox Docker container.
 
 It provides three important functional areas, without any Docker container learning curve:
 - Allows control over Gearbox Docker containers: stop, start, create, remove.
@@ -44,59 +44,60 @@ It provides three important functional areas, without any Docker container learn
 It also provides a functional SSH daemon for connecting remotely as well as a standard set of common tools and utilities.
 
 
-### Setup from GitHub repo
-`gb-launch` is currently in beta testing and is included along with all Gearbox Docker repos.
+### Download launch
+`launch` is currently in beta testing and is included along with all Gearbox Docker repos.
 Once out of beta, it will be included within the Gearbox installation package.
 
-For now, simply clone this repository to your local machine.
+For now, simply download the standalone `launch` binary for your O/S.
+- [Mac OSX 64bit](https://github.com/gearboxworks/docker-template/raw/master/bin/Darwin/launch)
+- [Linux 64bit](https://github.com/gearboxworks/docker-template/raw/master/bin/Linux/launch)
+- [Windows 64bit](https://github.com/gearboxworks/docker-template/raw/master/bin/Windows/launch)
 
-`git clone https://github.com/gearboxworks/docker-mongodb.git`
 
-### Running gb-launch
-There are many ways to call gb-launch, either directly or indirectly.
+### Running launch
+There are many ways to call launch, either directly or indirectly.
 Additionally, all host environment variables will be imported into the container seamlessly.
 This allows a devloper to try multiple versions of software as though they were installed locally.
 
 If a container is missing, it will be downloaded and created. Multiple versions can co-exist.
 
-Create, and start the mongodb Gearbox container.
+Install, create, and start the mongodb Gearbox container.
 
-`./bin/gb-launch -gb-name mongodb`
+`./launch install mongodb`
 
 Create, and start the mongodb Gearbox container. Run a shell.
 
-`./bin/gb-launch -gb-name mongodb -gb-shell`
+`./launch shell mongodb`
 
 Create, and start the mongodb Gearbox container with version 4.2.6 and run a shell.
 
-`./bin/gb-launch -gb-name mongodb -gb-version 4.2.6 -gb-shell`
+`./launch shell mongodb:4.2.6`
 
-If mongodb is symlinked to `gb-launch`, then you can drop the `-gb-name` flag.
+`./launch shell mongodb:4.2.6 ls -l`
 
-`./bin/mongodb`
+`./launch shell mongodb:4.2.6 ps -eaf`
+
+
+### Available commands
+If mongodb is symlinked to `launch`, then the Gearbox container will be determined automatically and the default command will be run.
+All available commands for a Gearbox container will be automatically symlinked upon installation.
+
+`./mongodb`
 
 Running mongodb Gearbox container default command. If a container has a default interactive command, arguments can be supplied without specifying that command.
 
-`./bin/mongodb -flag1 -flag2 variable`
+`./mongodb -flag1 -flag2 variable`
 
-`./bin/gb-launch -gb-name mongodb -gb-version 4.2.6 -flag1 -flag2 variable`
+`./launch mongodb:4.2.6 -flag1 -flag2 variable`
 
-
-Running alternate commands within the mongodb Gearbox container.
-
-`./bin/mongodb -gb-shell -- ls -l`
-
-`./bin/gb-launch -gb-name mongodb -gb-version 4.2.6 -gb-shell -- ls -l`
-
-`./bin/mongodb -gb-shell -- ps -eaf`
-
-`./bin/gb-launch -gb-name mongodb -gb-version 4.2.6 -gb-shell -- ps -eaf`
+Gearbox containers may have multiple executables that can be run. The mongodb Gearbox container has the following available commands:
 
 
+### Remote connection
 ssh - All [Gearbox](https://github.com/gearboxworks/) containers have a running SSH daemon. So you can connect remotely.
-To show what ports are exported to the host.
+To show what ports are exported to the host, use the following command.
 
-`./bin/gb-launch -gb-name mongodb -gb-list`
+`./launch list mongodb`
 
 
 ## Method 2: GitHub repo
@@ -164,7 +165,7 @@ shell - Run a shell, (/bin/bash), within a Docker container.
 ### SSH
 ssh - All [Gearbox](https://github.com/gearboxworks/) containers have a running SSH daemon. So you can connect remotely.
 
-Either use `gb-launch` above or discover the port and SSH directly.
+Either use `launch` above or discover the port and SSH directly.
 
 
 ```
