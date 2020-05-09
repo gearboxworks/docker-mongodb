@@ -22,7 +22,8 @@ then
 	if [ -f /etc/gearbox/build/mongodb.apt ]
 	then
 		DEBS="$(cat /etc/gearbox/build/mongodb.apt)"
-		${APTBIN} update && ${APTBIN} install ${DEBS}; checkExit
+		${APTBIN} update && ${APTBIN} install fuse; checkExit
+		${APTBIN} install ${DEBS}; checkExit
 	fi
 fi
 
