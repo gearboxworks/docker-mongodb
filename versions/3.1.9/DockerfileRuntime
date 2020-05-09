@@ -1,7 +1,7 @@
 
 ################################################################################
 # WARNING: This file has been auto-generated. DO NOT EDIT: WARNING
-# Created on 2020-05-09T16:56:26+1000, using template:DockerfileRuntime.tmpl and json:gearbox.json
+# Created on 2020-05-09T17:35:52+1000, using template:DockerfileRuntime.tmpl and json:gearbox.json
 # Referenced Docker container for docker-mongodb based off gearboxworks/gearbox-base:debian-wheezy with mongo:3.1.9 overlayed.
 
 ARG VERSION=3.1.9

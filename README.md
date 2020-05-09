@@ -81,13 +81,13 @@ Create, and start the mongodb Gearbox container. Run a shell.
 
 `./launch shell mongodb`
 
-Create, and start the mongodb Gearbox container with version 2.8.0 and run a shell.
+Create, and start the mongodb Gearbox container with version 3.4.24 and run a shell.
 
-`./launch shell mongodb:2.8.0`
+`./launch shell mongodb:3.4.24`
 
-`./launch shell mongodb:2.8.0 ls -l`
+`./launch shell mongodb:3.4.24 ls -l`
 
-`./launch shell mongodb:2.8.0 ps -eaf`
+`./launch shell mongodb:3.4.24 ps -eaf`
 
 
 ### Available commands
@@ -100,7 +100,7 @@ Running mongodb Gearbox container default command. If a container has a default 
 
 `./mongodb -flag1 -flag2 variable`
 
-`./launch mongodb:2.8.0 -flag1 -flag2 variable`
+`./launch mongodb:3.4.24 -flag1 -flag2 variable`
 
 Gearbox containers may have multiple executables that can be run. The mongodb Gearbox container has the following available commands:
 - The default command will execute `/usr/bin/mongo` within the container.
